@@ -2,6 +2,16 @@
 
 ## DONE
 
+### Frontend
+1. Setup React Dependencies
+2. Create Register Page
+3. Create Login Page
+4. Create Dashboard Page
+5. Configure React Router
+
+
+## IN-PROGRESS
+
 ### Backend
 
 1. Setup Backend Dependencies
@@ -23,18 +33,12 @@
 14. Create API Service
 15. Create Auth Context
 16. Create Protected Route Component
-17. Create Register Page
-18. Create Login Page
-19. Create Dashboard Page
-20. Configure React Router
+
 
 ### Documentation
 
 21. Create Project Documentation
 
-## IN-PROGRESS
-
-*No tasks currently in progress*
 
 ## TODO
 
