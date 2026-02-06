@@ -32,7 +32,7 @@ export const authAPI = {
 
 // User API
 export const userAPI = {
-  getProfile: () => api.get('/user/profile'),
+  getProfile: () => api.get('/user/me'),
 };
 
 export default api;

@@ -8,6 +8,10 @@
 3. Create Login Page
 4. Create Dashboard Page
 5. Configure React Router
+6. Setup React Dependencies
+7. Create API Service
+8. Create Auth Context
+9. Create Protected Route Component
 
 ### Backend
 
@@ -18,31 +22,9 @@
 5. Create DTOs
 6. Create Auth Controller
 7. Create User Controller
-
-## IN-PROGRESS
-
-### Backend
-
-6. Create JWT Utility
-7. Create Authentication Service
-8. Create User Service
-9. Configure Spring Security
-10. Create JWT Authentication Filter
-11. Create Auth Controller
-12. Create User Controller
-
-### Frontend
-
-13. Setup React Dependencies
-14. Create API Service
-15. Create Auth Context
-16. Create Protected Route Component
-
-
-### Documentation
-
-21. Create Project Documentation
-
+8. Create JWT Utility
+9. Create Authentication Service
+10. Create User Service
 
 ## TODO
 
@@ -52,5 +34,11 @@
 2. Test Frontend
 3. Setup MySQL Database
 4. Run and Test Full Application
+
+### Backend
+1. Configure Spring Security
+
+### Docs
+2. Create Project Documentation
 
 
