@@ -9,9 +9,6 @@
 4. Create Dashboard Page
 5. Configure React Router
 
-
-## IN-PROGRESS
-
 ### Backend
 
 1. Setup Backend Dependencies
@@ -19,6 +16,13 @@
 3. Create User Entity
 4. Create User Repository
 5. Create DTOs
+6. Create Auth Controller
+7. Create User Controller
+
+## IN-PROGRESS
+
+### Backend
+
 6. Create JWT Utility
 7. Create Authentication Service
 8. Create User Service
