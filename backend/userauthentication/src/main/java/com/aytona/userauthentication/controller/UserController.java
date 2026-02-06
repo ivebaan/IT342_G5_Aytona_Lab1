@@ -16,7 +16,7 @@ public class UserController {
     @Autowired
     private UserService userService;
     
-    @GetMapping("/profile")
+    @GetMapping("/me")
     public ResponseEntity<?> getCurrentUser() {
         try {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
