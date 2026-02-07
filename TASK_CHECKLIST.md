@@ -26,19 +26,17 @@
 9. Create Authentication Service
 10. Create User Service
 
-## TODO
+## DOCS
+1. Added the frs pdf
+
+## IN PROGRESS
 
 ### Testing
 
 1. Test Backend APIs
 2. Test Frontend
-3. Setup MySQL Database
 4. Run and Test Full Application
 
-### Backend
-1. Configure Spring Security
 
-### Docs
-2. Create Project Documentation
 
 
