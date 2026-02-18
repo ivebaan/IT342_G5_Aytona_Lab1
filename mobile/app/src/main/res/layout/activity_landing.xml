@@ -34,7 +34,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="to SecureAuth"
+                android:text="to MiniApp"
                 android:textColor="#FFB3B3"
                 android:textSize="18sp"
                 android:letterSpacing="0.02" />
