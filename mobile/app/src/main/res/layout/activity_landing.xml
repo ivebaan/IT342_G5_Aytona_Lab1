@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8F9FA">
+
+    <!-- Background gradient effect using nested layouts -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- Top decorative section with modern gradient -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/gradient_top"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingHorizontal="32dp"
+            android:paddingVertical="48dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Welcome"
+                android:textColor="#FFFFFF"
+                android:textSize="42sp"
+                android:textStyle="bold"
+                android:letterSpacing="0.03"
+                android:layout_marginBottom="12dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="to SecureAuth"
+                android:textColor="#FFB3B3"
+                android:textSize="18sp"
+                android:letterSpacing="0.02" />
+
+        </LinearLayout>
+
+        <!-- Bottom content section -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center|bottom"
+            android:orientation="vertical"
+            android:paddingHorizontal="28dp"
+            android:paddingVertical="48dp">
+
+            <!-- Card-like container -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:background="@drawable/card_background"
+                android:padding="32dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Start Your Journey"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:textColor="#1A1A2E"
+                    android:layout_marginBottom="8dp"
+                    android:letterSpacing="0.01" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Create a secure account and take control of your digital identity"
+                    android:textSize="14sp"
+                    android:textColor="#6B7280"
+                    android:layout_marginBottom="28dp"
+                    android:gravity="center"
+                    android:lineSpacingMultiplier="1.3" />
+
+                <Button
+                    android:id="@+id/btnGetStarted"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:text="Get Started"
+                    android:textAllCaps="false"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"
+                    android:background="@drawable/button_gradient"
+                    android:elevation="8dp"
+                    android:stateListAnimator="@null"
+                    android:layout_marginTop="8dp" />
+
+            </LinearLayout>
+
+            <!-- Decorative bottom element -->
+            <View
+                android:layout_width="60dp"
+                android:layout_height="4dp"
+                android:background="#C41E3A"
+                android:layout_marginTop="24dp"
+                android:alpha="0.6" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</FrameLayout>
