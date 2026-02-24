@@ -66,13 +66,13 @@ class LoginActivity : AppCompatActivity() {
                 // Successful login
                 Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show()
 
-                // Navigate to HomeActivity and pass the user's name
+                // Navigate to MainActivity (which hosts the fragments)
+                // and clear the back stack so user cannot go back to Login.
                 val intent = Intent(this, MainActivity::class.java).apply {
                     putExtra("full_name", savedFullName)
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 }
                 startActivity(intent)
-                // Optional: close login so user cannot go back here with Back button
-                finish()
             } else {
                 // Invalid credentials
                 Toast.makeText(this, "Invalid Credentials", Toast.LENGTH_SHORT).show()
