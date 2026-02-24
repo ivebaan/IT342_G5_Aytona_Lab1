@@ -7,6 +7,12 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.miniapp.network.ApiClient
+import com.example.miniapp.network.AuthResponse
+import com.example.miniapp.network.LoginRequest
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 /**
  * Screen for logging in an existing user.
@@ -18,7 +24,8 @@ class LoginActivity : AppCompatActivity() {
         private const val PREFS_NAME = "user_prefs"
         private const val KEY_FULL_NAME = "full_name"
         private const val KEY_EMAIL = "email"
-        private const val KEY_PASSWORD = "password"
+        private const val KEY_PASSWORD = "password" // kept only for compatibility
+        private const val KEY_TOKEN = "token"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,34 +56,63 @@ class LoginActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            // Retrieve saved user data
-            val prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-            val savedEmail = prefs.getString(KEY_EMAIL, null)
-            val savedPassword = prefs.getString(KEY_PASSWORD, null)
-            val savedFullName = prefs.getString(KEY_FULL_NAME, "User")
+            // Call backend /api/auth/login to validate credentials
+            val request = LoginRequest(
+                email = inputEmail,
+                password = inputPassword
+            )
 
-            // If no user was registered yet
-            if (savedEmail.isNullOrEmpty() || savedPassword.isNullOrEmpty()) {
-                Toast.makeText(this, "No registered user found. Please register first.", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
+            ApiClient.apiService.login(request).enqueue(object : Callback<AuthResponse> {
+                override fun onResponse(
+                    call: Call<AuthResponse>,
+                    response: Response<AuthResponse>
+                ) {
+                    if (response.isSuccessful && response.body() != null) {
+                        val body = response.body()!!
 
-            // Validate credentials
-            if (inputEmail == savedEmail && inputPassword == savedPassword) {
-                // Successful login
-                Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show()
+                        // Save user info and token from backend
+                        val prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+                        prefs.edit()
+                            .putString(KEY_FULL_NAME, body.username)
+                            .putString(KEY_EMAIL, body.email)
+                            .putString(KEY_TOKEN, body.token)
+                            // Optionally keep the last used password locally
+                            .putString(KEY_PASSWORD, inputPassword)
+                            .apply()
 
-                // Navigate to MainActivity (which hosts the fragments)
-                // and clear the back stack so user cannot go back to Login.
-                val intent = Intent(this, MainActivity::class.java).apply {
-                    putExtra("full_name", savedFullName)
-                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        Toast.makeText(
+                            this@LoginActivity,
+                            body.message.ifEmpty { "Login Successful" },
+                            Toast.LENGTH_SHORT
+                        ).show()
+
+                        // Navigate to MainActivity (which hosts the fragments)
+                        // and clear the back stack so user cannot go back to Login.
+                        val intent = Intent(this@LoginActivity, MainActivity::class.java).apply {
+                            putExtra("full_name", body.username)
+                            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        }
+                        startActivity(intent)
+                    } else {
+                        // Backend rejected credentials or other error
+                        val errorMsg = response.errorBody()?.string()
+                            ?: "Invalid Credentials"
+                        Toast.makeText(
+                            this@LoginActivity,
+                            errorMsg,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                 }
-                startActivity(intent)
-            } else {
-                // Invalid credentials
-                Toast.makeText(this, "Invalid Credentials", Toast.LENGTH_SHORT).show()
-            }
+
+                override fun onFailure(call: Call<AuthResponse>, t: Throwable) {
+                    Toast.makeText(
+                        this@LoginActivity,
+                        "Network error: ${t.localizedMessage ?: "Please try again"}",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            })
         }
     }
 }
